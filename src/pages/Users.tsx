@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Shield, Mail, Search } from 'lucide-react';
+import { Plus, Shield, Mail, Search, Trash2 } from 'lucide-react';
 
 const Users: React.FC = () => {
   const [users, setUsers] = useState<any[]>([
@@ -15,13 +15,19 @@ const Users: React.FC = () => {
   const handleInviteUser = (e: React.FormEvent) => {
     e.preventDefault();
     const user = {
-      id: users.length + 1,
+      id: users.length ? Math.max(...users.map(u => u.id)) + 1 : 1,
       ...newUser,
       status: 'Active'
     };
     setUsers([...users, user]);
     setShowModal(false);
     setNewUser({ name: '', email: '', role: 'Sales Agent' });
+  };
+
+  const handleDeleteUser = (id: number) => {
+    if (window.confirm('Are you sure you want to delete this team member?')) {
+      setUsers(users.filter(u => u.id !== id));
+    }
   };
 
   const filteredUsers = users.filter(u =>
@@ -64,6 +70,7 @@ const Users: React.FC = () => {
                 <th>Email Address</th>
                 <th>Role</th>
                 <th>Status</th>
+                <th style={{ textAlign: 'right' }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -91,6 +98,16 @@ const Users: React.FC = () => {
                     <span className={`badge ${u.status === 'Active' ? 'badge-success' : 'badge-secondary'}`}>
                       {u.status}
                     </span>
+                  </td>
+                  <td style={{ textAlign: 'right' }}>
+                    <button 
+                      className="btn btn-outline" 
+                      style={{ padding: '0.35rem 0.5rem', color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.2)', borderRadius: '6px' }}
+                      onClick={() => handleDeleteUser(u.id)}
+                      title="Delete User"
+                    >
+                      <Trash2 size={14} />
+                    </button>
                   </td>
                 </tr>
               ))}
