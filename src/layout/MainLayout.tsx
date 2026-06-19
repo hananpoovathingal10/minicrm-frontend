@@ -17,7 +17,8 @@ import {
   LogOut,
   Menu,
   X,
-  Tv
+  Tv,
+  ShieldCheck
 } from 'lucide-react';
 
 const MainLayout: React.FC = () => {
@@ -139,6 +140,10 @@ const MainLayout: React.FC = () => {
             <NavLink to="/previews" onClick={() => setIsMobileMenuOpen(false)} className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} style={{ padding: '0.6rem 0.8rem' }}>
               <Tv size={18} />
               Device Previews
+            </NavLink>
+            <NavLink to="/admin" onClick={() => setIsMobileMenuOpen(false)} className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} style={{ padding: '0.6rem 0.8rem', marginTop: '0.5rem', borderTop: '1px solid var(--border-color)', paddingTop: '1rem' }}>
+              <ShieldCheck size={18} />
+              Admin Overview
             </NavLink>
           </nav>
 

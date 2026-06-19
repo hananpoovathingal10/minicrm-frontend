@@ -5,6 +5,8 @@ import './App.css';
 // Lazy loading pages
 const Login = React.lazy(() => import('./pages/Login'));
 const Signup = React.lazy(() => import('./pages/Signup'));
+const GetStarted = React.lazy(() => import('./pages/GetStarted'));
+const AdminOverview = React.lazy(() => import('./pages/AdminOverview'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Customers = React.lazy(() => import('./pages/Customers'));
 const Leads = React.lazy(() => import('./pages/Leads'));
@@ -33,6 +35,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/get-started" element={<GetStarted />} />
           
           {/* Protected Routes inside Main Layout */}
           <Route path="/" element={<MainLayout />}>
@@ -49,6 +52,7 @@ function App() {
             <Route path="reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
             <Route path="settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
             <Route path="previews" element={<ProtectedRoute><Previews /></ProtectedRoute>} />
+            <Route path="admin" element={<ProtectedRoute><AdminOverview /></ProtectedRoute>} />
           </Route>
         </Routes>
       </React.Suspense>
