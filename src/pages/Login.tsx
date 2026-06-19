@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { fetchWithAuth } from '../services/api';
 
 const Login: React.FC = () => {
@@ -18,6 +18,8 @@ const Login: React.FC = () => {
   const [devOtp, setDevOtp] = useState<string | null>(null);
 
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const justRegistered = searchParams.get('registered') === 'true';
 
   // Countdown timer for resending OTP
   useEffect(() => {
@@ -125,6 +127,13 @@ const Login: React.FC = () => {
           </h2>
           <p>Sign in to continue to MiniCRM</p>
         </div>
+
+        {/* Signup success banner */}
+        {justRegistered && (
+          <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.25)', color: '#10b981', padding: '0.75rem 1rem', borderRadius: '10px', marginBottom: '1.5rem', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span>🎉</span> Account created! You can now sign in.
+          </div>
+        )}
 
         {/* Custom tabs based on pre-defined CSS in index.css */}
         <div className="tabs-container">
@@ -276,6 +285,20 @@ const Login: React.FC = () => {
             </div>
           </form>
         )}
+      </div>
+
+      {/* Create account link */}
+      <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+        <p style={{ fontSize: '0.875rem' }}>
+          Don't have an account?{' '}
+          <Link
+            to="/signup"
+            id="goto-signup-link"
+            style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: '600' }}
+          >
+            Create one for free →
+          </Link>
+        </p>
       </div>
     </div>
   );

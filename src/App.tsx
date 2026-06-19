@@ -4,6 +4,7 @@ import './App.css';
 
 // Lazy loading pages
 const Login = React.lazy(() => import('./pages/Login'));
+const Signup = React.lazy(() => import('./pages/Signup'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Customers = React.lazy(() => import('./pages/Customers'));
 const Leads = React.lazy(() => import('./pages/Leads'));
@@ -31,6 +32,7 @@ function App() {
       <React.Suspense fallback={<div className="flex-center" style={{ height: '100vh' }}>Loading...</div>}>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           
           {/* Protected Routes inside Main Layout */}
           <Route path="/" element={<MainLayout />}>
