@@ -18,6 +18,7 @@ const Communications = React.lazy(() => import('./pages/Communications'));
 const Campaigns = React.lazy(() => import('./pages/Campaigns'));
 const Reports = React.lazy(() => import('./pages/Reports'));
 const SettingsPage = React.lazy(() => import('./pages/Settings'));
+const Previews = React.lazy(() => import('./pages/Previews'));
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -45,6 +46,7 @@ function App() {
             <Route path="campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
             <Route path="reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
             <Route path="settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+            <Route path="previews" element={<ProtectedRoute><Previews /></ProtectedRoute>} />
           </Route>
         </Routes>
       </React.Suspense>
